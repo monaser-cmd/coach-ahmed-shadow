@@ -1,5 +1,5 @@
 import { Float } from "@react-three/drei";
-import ParticleField from "../ParticleField";
+import ParticleField from "../../ParticleField";
 
 const GlowingSphere = () => (
   <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
