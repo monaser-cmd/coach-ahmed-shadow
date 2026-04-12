@@ -7,6 +7,10 @@ import { Canvas } from "@react-three/fiber";
 import SceneManager from "./components/three/SceneManager";
 import GlobalBackground from "./components/three/GlobalBackground";
 import Index from "./pages/Index.tsx";
+import About from "./pages/About.tsx";
+import Transformations from "./pages/Transformations.tsx";
+import Packages from "./pages/Packages.tsx";
+import Contact from "./pages/Contact.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
@@ -27,6 +31,10 @@ const App = () => (
         </div>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/transformations" element={<Transformations />} />
+          <Route path="/packages" element={<Packages />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

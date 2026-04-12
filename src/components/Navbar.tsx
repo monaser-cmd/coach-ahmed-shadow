@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Transformations", href: "#transformations" },
-  { label: "Packages", href: "#packages" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
+  { label: "Transformations", href: "/transformations" },
+  { label: "Packages", href: "/packages" },
+  { label: "Contact", href: "/contact" },
 ];
 
 const Navbar = () => {
@@ -20,21 +21,6 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // Let default happen if it's not a hash link
-    if (!href.startsWith('#')) return;
-    
-    e.preventDefault();
-    setMobileOpen(false);
-
-    const targetId = href.substring(1);
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      window.history.pushState(null, "", href);
-    }
-  };
-
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -45,26 +31,25 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-4">
-        <a 
-          href="#home" 
-          onClick={(e) => handleLinkClick(e, "#home")}
+        <Link 
+          to="/" 
+          onClick={() => setMobileOpen(false)}
           className="font-display text-2xl font-bold tracking-wider"
         >
           <span className="text-gradient">SHADOW</span>
-        </a>
+        </Link>
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href)}
+              to={link.href}
               className="font-body text-sm font-medium text-muted-foreground hover:text-foreground transition-colors relative group"
             >
               {link.label}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -89,14 +74,14 @@ const Navbar = () => {
           >
             <div className="flex flex-col p-4 gap-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleLinkClick(e, link.href)}
+                  to={link.href}
+                  onClick={() => setMobileOpen(false)}
                   className="font-body text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
           </motion.div>
