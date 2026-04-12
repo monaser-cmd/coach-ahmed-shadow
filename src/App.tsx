@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Canvas } from "@react-three/fiber";
+import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import SceneManager from "./components/three/SceneManager";
 import GlobalBackground from "./components/three/GlobalBackground";
 import Index from "./pages/Index.tsx";
@@ -24,9 +25,17 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <div className="fixed inset-0 -z-10 bg-[#0a0a0a]">
-          <Canvas camera={{ position: [0, 0, 10], fov: 75 }}>
+          <Canvas camera={{ position: [0, 0, 10], fov: 75 }} gl={{ antialias: false }}>
             <SceneManager />
             <GlobalBackground />
+            <EffectComposer>
+              <Bloom 
+                intensity={1.5} 
+                luminanceThreshold={0.2} 
+                luminanceSmoothing={0.9} 
+                mipmapBlur 
+              />
+            </EffectComposer>
           </Canvas>
         </div>
         <Routes>
@@ -37,7 +46,6 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

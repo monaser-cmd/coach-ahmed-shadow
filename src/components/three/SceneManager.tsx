@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import AboutSector from "./sectors/AboutSector";
 import TransformationsSector from "./sectors/TransformationsSector";
+import PackagesSector from "./sectors/PackagesSector";
+import ContactSector from "./sectors/ContactSector";
 
 const SceneManager = () => {
   const { camera } = useThree();
@@ -14,7 +16,6 @@ const SceneManager = () => {
     const handleScroll = (e: any) => {
       if (location.pathname === "/transformations") {
         scrollY.current = e.detail;
-        // Apply vertical offset relative to target position
         camera.position.y = 0 + scrollY.current;
       }
     };
@@ -34,7 +35,6 @@ const SceneManager = () => {
 
     const target = targets[location.pathname] || targets["/"];
     
-    // Reset scroll when leaving transformations
     if (location.pathname !== "/transformations") {
       scrollY.current = 0;
     }
@@ -52,6 +52,8 @@ const SceneManager = () => {
     <>
       <AboutSector />
       <TransformationsSector />
+      <PackagesSector />
+      <ContactSector />
     </>
   );
 };
