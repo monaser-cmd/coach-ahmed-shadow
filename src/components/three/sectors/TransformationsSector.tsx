@@ -4,6 +4,18 @@ import { Image, Text, Float } from "@react-three/drei";
 import * as THREE from "three";
 import { supabase } from "@/lib/supabase";
 
+import t1 from "@/assets/transform-1.jpeg";
+import t2 from "@/assets/transform-2.jpeg";
+import t3 from "@/assets/transform-3.jpeg";
+import t4 from "@/assets/transform-4.jpeg";
+import t5 from "@/assets/transform-5.jpeg";
+import t6 from "@/assets/transform-6.jpeg";
+import t7 from "@/assets/transform-7.jpeg";
+import t8 from "@/assets/transform-8.jpeg";
+import t9 from "@/assets/transform-9.jpeg";
+
+const localImages = [t1, t2, t3, t4, t5, t6, t7, t8, t9];
+
 interface Transformation {
   id: string;
   image_url: string;
@@ -14,7 +26,6 @@ interface Transformation {
 const TransformationsSector = () => {
   const [items, setItems] = useState<Transformation[]>([]);
   const groupRef = useRef<THREE.Group>(null);
-  const { viewport } = useThree();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,15 +34,17 @@ const TransformationsSector = () => {
         .select("*")
         .order("created_at", { ascending: false });
       
-      if (!error && data) {
+      if (!error && data && data.length > 0) {
         setItems(data);
       } else {
-        // Fallback placeholder data if supabase fails/empty
-        setItems([
-          { id: "1", image_url: "/placeholder.svg", title: "Transformation 1", description: "12 Weeks" },
-          { id: "2", image_url: "/placeholder.svg", title: "Transformation 2", description: "6 Months" },
-          { id: "3", image_url: "/placeholder.svg", title: "Transformation 3", description: "1 Year" },
-        ]);
+        // Fallback to local transformation photos
+        const fallbackItems = localImages.map((url, i) => ({
+          id: `local-${i}`,
+          image_url: url,
+          title: `Transformation ${i + 1}`,
+          description: "Success Story"
+        }));
+        setItems(fallbackItems);
       }
     };
     fetchData();
@@ -39,7 +52,6 @@ const TransformationsSector = () => {
 
   useFrame((state) => {
     if (groupRef.current) {
-      // Gentle floating animation for the whole wall
       groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.5) * 0.2;
     }
   });
@@ -60,52 +72,38 @@ const TransformationsSector = () => {
 
 const TransformationCard = ({ item, index, total }: { item: Transformation, index: number, total: number }) => {
   const meshRef = useRef<THREE.Mesh>(null);
-  const spacing = 6;
+  const spacing = 7; // Increased spacing for better visibility
   const yOffset = (index - (total - 1) / 2) * -spacing;
 
   return (
     <group position={[0, yOffset, 0]}>
       <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.5}>
         <mesh ref={meshRef}>
-          <planeGeometry args={[4, 5.5]} />
+          <planeGeometry args={[4.5, 4.5]} />
           <meshBasicMaterial color="#ff0000" transparent opacity={0.1} />
           
-          {/* Main Image */}
           <Image 
             url={item.image_url} 
-            scale={[3.8, 5.3]} 
+            scale={[4.3, 4.3]} 
             toneMapped={false}
             transparent
             side={THREE.DoubleSide}
           />
 
-          {/* Glowing Border */}
           <mesh position={[0, 0, -0.01]}>
-            <planeGeometry args={[4.1, 5.6]} />
+            <planeGeometry args={[4.6, 4.6]} />
             <meshBasicMaterial color="#ff0000" />
           </mesh>
         </mesh>
 
         <Text
-          position={[0, -3.2, 0]}
+          position={[0, -2.8, 0]}
           fontSize={0.4}
           color="#ff0000"
-          font="/fonts/SpaceGrotesk-Bold.ttf" // Assuming we follow Pro Max font choice
           anchorX="center"
           anchorY="middle"
         >
           {item.title.toUpperCase()}
-        </Text>
-        <Text
-          position={[0, -3.8, 0]}
-          fontSize={0.25}
-          color="#ffffff"
-          opacity={0.7}
-          transparent
-          anchorX="center"
-          anchorY="middle"
-        >
-          {item.description}
         </Text>
       </Float>
     </group>

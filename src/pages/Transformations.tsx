@@ -15,9 +15,8 @@ const Transformations = () => {
   const { scrollYProgress } = useScroll();
   
   // Map scroll progress to camera Y position (from top to bottom of the wall)
-  // The wall is centered at 0, spacing is 6.
-  // totalHeight = (items.length - 1) * 6
-  const cameraY = useTransform(scrollYProgress, [0, 1], [0, -(items.length - 1) * 6]);
+  // Matching the spacing of 7 in TransformationsSector.tsx
+  const cameraY = useTransform(scrollYProgress, [0, 1], [0, -(items.length - 1) * 7]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,21 +25,22 @@ const Transformations = () => {
         .select("id, title, description")
         .order("created_at", { ascending: false });
       
-      if (!error && data) {
+      if (!error && data && data.length > 0) {
         setItems(data);
       } else {
-        setItems([
-          { id: "1", title: "Transformation 1", description: "12 Weeks" },
-          { id: "2", title: "Transformation 2", description: "6 Months" },
-          { id: "3", title: "Transformation 3", description: "1 Year" },
-        ]);
+        // Match the 9 local images in TransformationsSector.tsx
+        setItems(Array.from({ length: 9 }).map((_, i) => ({
+          id: `local-${i}`,
+          title: `Transformation ${i + 1}`,
+          description: "Witness the incredible physical and mental transformations achieved by my clients."
+        })));
       }
     };
     fetchData();
   }, []);
 
   return (
-    <main className="bg-transparent min-h-[300vh]">
+    <main className="bg-transparent min-h-[400vh]">
       <Navbar />
       
       {/* Sticky Header */}
@@ -62,15 +62,16 @@ const Transformations = () => {
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
+              viewport={{ margin: "-100px" }}
               className="glass-panel p-8 rounded-2xl neon-border max-w-md pointer-events-auto backdrop-blur-md"
             >
-              <span className="text-primary font-display text-sm tracking-widest mb-2 block">
-                CASE {index + 1}
+              <span className="text-primary font-display text-sm tracking-widest mb-2 block uppercase">
+                Phase {index + 1}
               </span>
               <h2 className="text-3xl font-display font-bold mb-4 text-gradient uppercase">
                 {item.title}
               </h2>
-              <p className="font-body text-lg text-muted-foreground">
+              <p className="font-body text-lg text-muted-foreground leading-relaxed">
                 {item.description}
               </p>
             </motion.div>
@@ -78,11 +79,10 @@ const Transformations = () => {
         ))}
       </div>
 
-      {/* Helper component to inject camera Y into SceneManager via global state or effect */}
       <CameraScroller y={cameraY} />
 
       <div className="h-screen flex items-center justify-center">
-        <p className="font-display text-primary animate-pulse tracking-widest">END OF TRANSFORMATIONS</p>
+        <p className="font-display text-primary animate-pulse tracking-widest uppercase">Shadow Transformation Program</p>
       </div>
       
       <Footer />
@@ -90,13 +90,7 @@ const Transformations = () => {
   );
 };
 
-// Internal component to sync Framer Motion value to Three.js camera
-import { useThree } from "@react-three/fiber";
-
 const CameraScroller = ({ y }: { y: any }) => {
-  // This needs to be inside the Canvas, but Transformations.tsx is outside.
-  // We can use a custom event or a shared store. 
-  // Let's use a custom event for simplicity in this implementation.
   useEffect(() => {
     return y.onChange((latest: number) => {
       window.dispatchEvent(new CustomEvent("camera-scroll-y", { detail: latest }));
