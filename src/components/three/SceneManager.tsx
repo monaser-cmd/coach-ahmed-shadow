@@ -2,6 +2,7 @@ import { useThree } from "@react-three/fiber";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import gsap from "gsap";
+import AboutSector from "./sectors/AboutSector";
 
 const SceneManager = () => {
   const { camera } = useThree();
@@ -26,7 +27,11 @@ const SceneManager = () => {
     });
   }, [location.pathname, camera]);
 
-  return null;
+  return (
+    <>
+      <AboutSector />
+    </>
+  );
 };
 
 export default SceneManager;
