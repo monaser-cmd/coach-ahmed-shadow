@@ -4,7 +4,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Canvas } from "@react-three/fiber";
-import { EffectComposer, Bloom } from "@react-three/postprocessing";
 import SceneManager from "./components/three/SceneManager";
 import GlobalBackground from "./components/three/GlobalBackground";
 import Index from "./pages/Index.tsx";
@@ -28,26 +27,20 @@ const App = () => (
           <Canvas camera={{ position: [0, 0, 10], fov: 75 }} gl={{ antialias: false }}>
             <SceneManager />
             <GlobalBackground />
-            <EffectComposer>
-              <Bloom 
-                intensity={1.5} 
-                luminanceThreshold={0.2} 
-                luminanceSmoothing={0.9} 
-                mipmapBlur 
-              />
-            </EffectComposer>
           </Canvas>
         </div>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/transformations" element={<Transformations />} />
-          <Route path="/packages" element={<Packages />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/admin" element={<AdminLogin />} />
-          <Route path="/admin/dashboard" element={<AdminDashboard />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="relative z-10 min-h-screen">
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/transformations" element={<Transformations />} />
+            <Route path="/packages" element={<Packages />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

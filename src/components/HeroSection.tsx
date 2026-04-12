@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import HeroScene from "./HeroScene";
 import heroBg from "@/assets/hero-bg.jpg";
 
 const HeroSection = () => (
@@ -15,9 +14,6 @@ const HeroSection = () => (
       />
       <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
     </div>
-
-    {/* 3D Scene */}
-    <HeroScene />
 
     {/* Content */}
     <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">

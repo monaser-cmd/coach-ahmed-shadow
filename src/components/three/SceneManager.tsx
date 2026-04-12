@@ -6,6 +6,7 @@ import AboutSector from "./sectors/AboutSector";
 import TransformationsSector from "./sectors/TransformationsSector";
 import PackagesSector from "./sectors/PackagesSector";
 import ContactSector from "./sectors/ContactSector";
+import HomeSector from "./sectors/HomeSector";
 
 const SceneManager = () => {
   const { camera } = useThree();
@@ -50,6 +51,7 @@ const SceneManager = () => {
 
   return (
     <>
+      <HomeSector />
       <AboutSector />
       <TransformationsSector />
       <PackagesSector />

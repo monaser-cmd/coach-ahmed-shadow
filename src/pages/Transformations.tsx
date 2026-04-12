@@ -12,6 +12,7 @@ interface Transformation {
 
 const Transformations = () => {
   const [items, setItems] = useState<Transformation[]>([]);
+  const [loading, setLoading] = useState(true);
   const { scrollYProgress } = useScroll();
   
   // Map scroll progress to camera Y position (from top to bottom of the wall)
@@ -20,24 +21,44 @@ const Transformations = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data, error } = await supabase
-        .from("transformations")
-        .select("id, title, description")
-        .order("created_at", { ascending: false });
-      
-      if (!error && data && data.length > 0) {
-        setItems(data);
-      } else {
-        // Match the 9 local images in TransformationsSector.tsx
+      try {
+        const { data, error } = await supabase
+          .from("transformations")
+          .select("id, title, description")
+          .order("created_at", { ascending: false });
+        
+        if (!error && data && data.length > 0) {
+          setItems(data);
+        } else {
+          // Match the 9 local images in TransformationsSector.tsx
+          setItems(Array.from({ length: 9 }).map((_, i) => ({
+            id: `local-${i}`,
+            title: `Transformation ${i + 1}`,
+            description: "Witness the incredible physical and mental transformations achieved by my clients."
+          })));
+        }
+      } catch (err) {
+        console.error("Failed to fetch transformations:", err);
+        // Fallback to local items on error
         setItems(Array.from({ length: 9 }).map((_, i) => ({
           id: `local-${i}`,
           title: `Transformation ${i + 1}`,
           description: "Witness the incredible physical and mental transformations achieved by my clients."
         })));
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
+        <Loader2 className="w-12 h-12 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   return (
     <main className="bg-transparent min-h-[400vh]">

@@ -30,27 +30,37 @@ const TransformationsSection = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      // Fetch Instagram URL
-      const { data: settingsData } = await supabase
-        .from("site_settings")
-        .select("*")
-        .eq("key", "instagram")
-        .single();
-      
-      if (settingsData) setInstagramUrl(settingsData.value);
+      console.log("TransformationsSection: Starting fetch");
+      try {
+        // Fetch Instagram URL
+        const { data: settingsData } = await supabase
+          .from("site_settings")
+          .select("*")
+          .eq("key", "instagram")
+          .single();
+        
+        if (settingsData) setInstagramUrl(settingsData.value);
 
-      // Fetch Transformations
-      const { data: transData } = await supabase
-        .from("transformations")
-        .select("image_url")
-        .order("created_at", { ascending: false });
-      
-      if (transData && transData.length > 0) {
-        setTransformations(transData.map(t => t.image_url));
-      } else {
+        // Fetch Transformations
+        const { data: transData } = await supabase
+          .from("transformations")
+          .select("image_url")
+          .order("created_at", { ascending: false });
+        
+        if (transData && transData.length > 0) {
+          console.log("TransformationsSection: Data fetched", transData.length);
+          setTransformations(transData.map(t => t.image_url));
+        } else {
+          console.log("TransformationsSection: Using fallback data");
+          setTransformations(localTransformations);
+        }
+      } catch (err) {
+        console.error("Failed to fetch transformations:", err);
         setTransformations(localTransformations);
+      } finally {
+        console.log("TransformationsSection: Setting loading to false");
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     fetchData();

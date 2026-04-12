@@ -21,15 +21,31 @@ const PackagesSection = () => {
 
   useEffect(() => {
     const fetchPackages = async () => {
-      const { data, error } = await supabase
-        .from("packages")
-        .select("*")
-        .order("price", { ascending: true });
-      
-      if (!error && data) {
-        setPackages(data);
+      console.log("PackagesSection: Starting fetch");
+      try {
+        const { data, error } = await supabase
+          .from("packages")
+          .select("*")
+          .order("price", { ascending: true });
+        
+        if (!error && data && data.length > 0) {
+          console.log("PackagesSection: Data fetched", data.length);
+          setPackages(data);
+        } else {
+          console.log("PackagesSection: Using fallback data");
+          // Fallback to local data if empty or error
+          setPackages([
+            { id: "1", name: "Basic", price: "1500", duration: "1 Month", description: "Start your journey", features: ["Plan", "Support"], is_popular: false },
+            { id: "2", name: "Pro", price: "3500", duration: "3 Months", description: "Best results", features: ["Plan", "Support", "Calls"], is_popular: true },
+            { id: "3", name: "Elite", price: "6000", duration: "6 Months", description: "Full transformation", features: ["Everything"], is_popular: false }
+          ]);
+        }
+      } catch (err) {
+        console.error("Failed to fetch packages:", err);
+      } finally {
+        console.log("PackagesSection: Setting loading to false");
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     fetchPackages();

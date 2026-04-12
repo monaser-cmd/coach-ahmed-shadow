@@ -51,17 +51,23 @@ const Packages = () => {
 
   useEffect(() => {
     const fetchPackages = async () => {
-      const { data, error } = await supabase
-        .from("packages")
-        .select("*")
-        .order("price", { ascending: true });
-      
-      if (!error && data && data.length > 0) {
-        setPackages(data);
-      } else {
+      try {
+        const { data, error } = await supabase
+          .from("packages")
+          .select("*")
+          .order("price", { ascending: true });
+        
+        if (!error && data && data.length > 0) {
+          setPackages(data);
+        } else {
+          setPackages(localPackages);
+        }
+      } catch (err) {
+        console.error("Failed to fetch packages:", err);
         setPackages(localPackages);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     };
 
     fetchPackages();
