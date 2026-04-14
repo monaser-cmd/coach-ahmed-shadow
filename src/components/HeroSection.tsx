@@ -1,18 +1,22 @@
 import { motion } from "framer-motion";
-import heroBg from "@/assets/hero-bg.jpg";
+import { Canvas } from "@react-three/fiber";
+import ParticleField from "./ParticleField";
 
 const HeroSection = () => (
-  <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-    {/* Background image */}
+  <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#050505]">
+    {/* 3D Background Layer */}
     <div className="absolute inset-0 z-0">
-      <img
-        src={heroBg}
-        alt="Cinematic gym"
-        width={1920}
-        height={1080}
-        className="w-full h-full object-cover opacity-40"
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
+      <Canvas
+        camera={{ position: [0, 0, 8], fov: 60 }}
+        gl={{ antialias: true, alpha: true }}
+        style={{ background: "transparent" }}
+      >
+        <ambientLight intensity={0.1} />
+        <pointLight position={[5, 5, 5]} color="#ff3333" intensity={2} />
+        <ParticleField count={600} />
+      </Canvas>
+      {/* Subtle gradient overlay for depth */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-[#050505]" />
     </div>
 
     {/* Content */}
