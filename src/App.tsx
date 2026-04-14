@@ -3,9 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Canvas } from "@react-three/fiber";
-import SceneManager from "./components/three/SceneManager";
-import GlobalBackground from "./components/three/GlobalBackground";
 import Index from "./pages/Index.tsx";
 import About from "./pages/About.tsx";
 import Transformations from "./pages/Transformations.tsx";
@@ -23,13 +20,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <div className="fixed inset-0 -z-10 bg-[#0a0a0a]">
-          <Canvas camera={{ position: [0, 0, 10], fov: 75 }} gl={{ antialias: false }}>
-            <SceneManager />
-            <GlobalBackground />
-          </Canvas>
-        </div>
-        <div className="relative z-10 min-h-screen">
+        <div className="relative z-10 min-h-screen bg-[#050505]">
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<About />} />
