@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Oswald:wght@400;500;600;700&family=Cairo:wght@400;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -42,6 +42,7 @@
 
     --font-display: 'Oswald', sans-serif;
     --font-body: 'Inter', sans-serif;
+    --font-arabic: 'Cairo', sans-serif;
 
     --shadow-neon: 0 0 20px hsl(0 100% 50% / 0.3), 0 0 60px hsl(0 100% 50% / 0.1);
     --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.5);

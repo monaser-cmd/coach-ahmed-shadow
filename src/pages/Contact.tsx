@@ -125,7 +125,14 @@ const Contact = () => {
   );
 };
 
-const ContactInfoCard = ({ icon, title, value, link }: any) => {
+interface ContactInfoCardProps {
+  icon: React.ReactNode;
+  title: string;
+  value: string;
+  link?: string;
+}
+
+const ContactInfoCard = ({ icon, title, value, link }: ContactInfoCardProps) => {
   const CardContent = (
     <div className="glass-panel p-6 rounded-2xl neon-border border-primary/10 hover:border-primary/40 transition-all group">
       <div className="text-primary mb-4 group-hover:scale-110 transition-transform duration-300">{icon}</div>

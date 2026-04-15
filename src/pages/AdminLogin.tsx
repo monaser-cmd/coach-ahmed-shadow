@@ -29,8 +29,9 @@ const AdminLogin = () => {
 
       toast.success("Welcome back, Captain!");
       navigate("/admin/dashboard");
-    } catch (error: any) {
-      toast.error(error.message || "Invalid login credentials");
+    } catch (error) {
+      const err = error as Error;
+      toast.error(err.message || "Invalid login credentials");
     } finally {
       setLoading(false);
     }

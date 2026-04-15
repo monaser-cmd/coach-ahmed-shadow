@@ -15,7 +15,7 @@ const Footer = () => {
         .select("*");
       
       if (!error && data) {
-        const settings = data.reduce((acc: any, curr) => {
+        const settings = data.reduce((acc: Record<string, string>, curr) => {
           acc[curr.key] = curr.value;
           return acc;
         }, {});

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
 import { motion } from "framer-motion";
+import { Session } from "@supabase/supabase-js";
 import { 
   LogOut, 
   LayoutDashboard, 
@@ -34,7 +35,7 @@ interface Transformation {
 }
 
 const AdminDashboard = () => {
-  const [session, setSession] = useState<any>(null);
+  const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
   const [packages, setPackages] = useState<Package[]>([]);
   const [updatingPackage, setUpdatingPackage] = useState<string | null>(null);
@@ -97,8 +98,9 @@ const AdminDashboard = () => {
 
       toast.success("Transformation added!");
       fetchTransformations();
-    } catch (error: any) {
-      toast.error("Upload failed: " + error.message);
+    } catch (error) {
+      const err = error as Error;
+      toast.error("Upload failed: " + err.message);
     } finally {
       setUploading(false);
     }
@@ -120,8 +122,9 @@ const AdminDashboard = () => {
 
       toast.success("Deleted successfully");
       fetchTransformations();
-    } catch (error: any) {
-      toast.error("Delete failed: " + error.message);
+    } catch (error) {
+      const err = error as Error;
+      toast.error("Delete failed: " + err.message);
     }
   };
 
@@ -131,11 +134,10 @@ const AdminDashboard = () => {
       .select("*");
     
     if (!error && data) {
-      const settings = data.reduce((acc: any, curr) => {
+      const settings = data.reduce((acc: Record<string, string>, curr) => {
         acc[curr.key] = curr.value;
         return acc;
-      }, {});
-      setSiteSettings(settings);
+      }, {});      setSiteSettings(settings);
     }
   };
 
@@ -172,6 +174,7 @@ const AdminDashboard = () => {
     const { error } = await supabase
       .from("packages")
       .update({
+        name: pkg.name,
         price: pkg.price,
         duration: pkg.duration,
         description: pkg.description,
@@ -311,9 +314,42 @@ const AdminDashboard = () => {
               animate={{ opacity: 1, y: 0 }}
               className="space-y-6 max-w-4xl mx-auto"
             >
-              <div className="text-center mb-10">
-                <h2 className="text-3xl font-display font-bold">Pricing <span className="text-gradient">Control</span></h2>
-                <p className="text-muted-foreground text-sm mt-1">Update package prices and descriptions.</p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-3xl font-display font-bold">Pricing <span className="text-gradient">Control</span></h2>
+                  <p className="text-muted-foreground text-sm mt-1">Update package prices and descriptions.</p>
+                </div>
+                {packages.length > 0 && (
+                  <Button 
+                    variant="outline" 
+                    className="border-primary/30 text-primary hover:bg-primary/10 text-xs font-display tracking-widest uppercase"
+                    onClick={async () => {
+                      if (confirm("This will delete all current packages and reset them to the 5 latest offers. Continue?")) {
+                        const { error: deleteError } = await supabase.from("packages").delete().neq("id", "00000000-0000-0000-0000-000000000000");
+                        if (deleteError) {
+                          toast.error("Delete failed: " + deleteError.message);
+                          return;
+                        }
+                        const initialPackages = [
+                          { name: "باقة الشهر", price: "700", duration: "1 Month", description: "📌700 في الشهر", features: ["متابعة يومية", "نظام غذائي مخصص", "نظام تدريبي مخصص"], is_popular: false },
+                          { name: "باقة الشهرين", price: "1050", duration: "2 Months", description: "📌1050 في الشهرين", features: ["متابعة يومية", "نظام غذائي مخصص", "نظام تدريبي مخصص", "تحديثات أسبوعية"], is_popular: false },
+                          { name: "عرض ال٣شهور", price: "1400", duration: "3 Months", description: "📌1400 ف عرض ال٣شهور وده بدل 1950ج", features: ["متابعة يومية", "نظام غذائي مخصص", "نظام تدريبي مخصص", "تحديثات أسبوعية", "أفضل قيمة"], is_popular: true },
+                          { name: "عرض ال٦شهور", price: "1999", duration: "6 Months", description: "📌 1999 عرض خاااص لل٦شهور", features: ["متابعة يومية", "نظام غذائي مخصص", "نظام تدريبي مخصص", "تحديثات أسبوعية", "تحول كامل"], is_popular: false },
+                          { name: "عرض الصحاب", price: "2300", duration: "For 2 People", description: "و تقدر تشترك في عرض الصحاب 2300 ج لو انتوا اتنين مع بعض اخوات او صحاب", features: ["لشخصين", "متابعة يومية", "نظام غذائي مخصص", "نظام تدريبي مخصص"], is_popular: false }
+                        ];
+                        const { error: insertError } = await supabase.from("packages").insert(initialPackages);
+                        if (insertError) {
+                          toast.error("Reset failed: " + insertError.message);
+                        } else {
+                          toast.success("Successfully reset to current offers!");
+                          fetchPackages();
+                        }
+                      }
+                    }}
+                  >
+                    Reset to Latest Offers
+                  </Button>
+                )}
               </div>
 
               {packages.length === 0 && (
@@ -324,9 +360,11 @@ const AdminDashboard = () => {
                     className="mt-4 border-primary/50 text-primary hover:bg-primary/10"
                     onClick={async () => {
                       const initialPackages = [
-                        { name: "Basic", price: "400", duration: "30 DAYS", description: "Just one month ,, Its not enough to reach your goal", features: ["Special Diet", "Training Plan", "Save money", "More useful"], is_popular: false },
-                        { name: "Pro", price: "550", duration: "45 DAYS", description: "A month and a half is enough to feel the change", features: ["Special Diet", "Training Plan", "Save money", "More useful"], is_popular: true },
-                        { name: "Premium", price: "850", duration: "90 DAYS", description: "Three months of work to reach the goal", features: ["Special Diet", "Training Plan", "Save money", "More useful"], is_popular: false }
+                        { name: "باقة الشهر", price: "700", duration: "1 Month", description: "📌700 في الشهر", features: ["متابعة يومية", "نظام غذائي مخصص", "نظام تدريبي مخصص"], is_popular: false },
+                        { name: "باقة الشهرين", price: "1050", duration: "2 Months", description: "📌1050 في الشهرين", features: ["متابعة يومية", "نظام غذائي مخصص", "نظام تدريبي مخصص", "تحديثات أسبوعية"], is_popular: false },
+                        { name: "عرض ال٣شهور", price: "1400", duration: "3 Months", description: "📌1400 ف عرض ال٣شهور وده بدل 1950ج", features: ["متابعة يومية", "نظام غذائي مخصص", "نظام تدريبي مخصص", "تحديثات أسبوعية", "أفضل قيمة"], is_popular: true },
+                        { name: "عرض ال٦شهور", price: "1999", duration: "6 Months", description: "📌 1999 عرض خاااص لل٦شهور", features: ["متابعة يومية", "نظام غذائي مخصص", "نظام تدريبي مخصص", "تحديثات أسبوعية", "تحول كامل"], is_popular: false },
+                        { name: "عرض الصحاب", price: "2300", duration: "For 2 People", description: "و تقدر تشترك في عرض الصحاب 2300 ج لو انتوا اتنين مع بعض اخوات او صحاب", features: ["لشخصين", "متابعة يومية", "نظام غذائي مخصص", "نظام تدريبي مخصص"], is_popular: false }
                       ];
                       await supabase.from("packages").insert(initialPackages);
                       fetchPackages();
@@ -340,16 +378,27 @@ const AdminDashboard = () => {
               <div className="grid gap-6">
                 {packages.map((pkg) => (
                   <div key={pkg.id} className="glass-panel p-6 rounded-2xl neon-border flex flex-col md:flex-row gap-6 items-center">
-                    <div className="flex-1 w-full space-y-4">
-                      <div className="flex items-center justify-between">
-                        <h3 className="font-display font-bold text-lg">{pkg.name} Package</h3>
+                    <div className="flex-1 w-full space-y-4 text-right">
+                      <div className="flex items-center justify-between flex-row-reverse">
+                        <h3 className="font-arabic font-bold text-lg">{pkg.name} Package</h3>
                         {pkg.is_popular && <span className="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded-full border border-primary/30">POPULAR</span>}
                       </div>
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div className="space-y-2">
-                          <label className="text-[10px] uppercase tracking-widest text-muted-foreground">Price (LE)</label>
+                          <label className="text-[10px] uppercase tracking-widest text-muted-foreground block">Name (اسم الباقة)</label>
                           <input 
-                            className="w-full bg-background/50 border border-border/50 rounded-lg p-2 text-sm focus:outline-none focus:border-primary transition-colors" 
+                            className="w-full bg-background/50 border border-border/50 rounded-lg p-2 text-sm font-arabic focus:outline-none focus:border-primary transition-colors text-right" 
+                            value={pkg.name}
+                            onChange={(e) => {
+                              const newPackages = packages.map(p => p.id === pkg.id ? { ...p, name: e.target.value } : p);
+                              setPackages(newPackages);
+                            }}
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-[10px] uppercase tracking-widest text-muted-foreground block text-left">Price (LE)</label>
+                          <input 
+                            className="w-full bg-background/50 border border-border/50 rounded-lg p-2 text-sm focus:outline-none focus:border-primary transition-colors text-left" 
                             value={pkg.price}
                             onChange={(e) => {
                               const newPackages = packages.map(p => p.id === pkg.id ? { ...p, price: e.target.value } : p);
@@ -358,9 +407,9 @@ const AdminDashboard = () => {
                           />
                         </div>
                         <div className="space-y-2">
-                          <label className="text-[10px] uppercase tracking-widest text-muted-foreground">Duration</label>
+                          <label className="text-[10px] uppercase tracking-widest text-muted-foreground block text-left">Duration</label>
                           <input 
-                            className="w-full bg-background/50 border border-border/50 rounded-lg p-2 text-sm focus:outline-none focus:border-primary transition-colors" 
+                            className="w-full bg-background/50 border border-border/50 rounded-lg p-2 text-sm focus:outline-none focus:border-primary transition-colors text-left" 
                             value={pkg.duration}
                             onChange={(e) => {
                               const newPackages = packages.map(p => p.id === pkg.id ? { ...p, duration: e.target.value } : p);
@@ -370,9 +419,9 @@ const AdminDashboard = () => {
                         </div>
                       </div>
                       <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest text-muted-foreground">Description</label>
+                        <label className="text-[10px] uppercase tracking-widest text-muted-foreground block">Description (الوصف)</label>
                         <textarea 
-                          className="w-full bg-background/50 border border-border/50 rounded-lg p-2 text-sm focus:outline-none focus:border-primary transition-colors h-20 resize-none" 
+                          className="w-full bg-background/50 border border-border/50 rounded-lg p-2 text-sm font-arabic focus:outline-none focus:border-primary transition-colors h-24 resize-none text-right" 
                           value={pkg.description}
                           onChange={(e) => {
                             const newPackages = packages.map(p => p.id === pkg.id ? { ...p, description: e.target.value } : p);

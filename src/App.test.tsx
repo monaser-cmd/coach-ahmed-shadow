@@ -6,15 +6,7 @@ import App from "./App";
 vi.mock("@react-three/fiber", () => ({
   Canvas: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   useThree: () => ({ camera: { position: { x: 0, y: 0, z: 0 } } }),
-}));
-
-// Mock Three.js components that use R3F hooks
-vi.mock("./components/three/SceneManager", () => ({
-  default: () => <div data-testid="scene-manager" />,
-}));
-
-vi.mock("./components/three/GlobalBackground", () => ({
-  default: () => <div data-testid="global-background" />,
+  useFrame: vi.fn(),
 }));
 
 // Mock GSAP
@@ -28,8 +20,9 @@ describe("App Routing", () => {
   it("renders Index page on / route", async () => {
     window.history.pushState({}, "Home", "/");
     render(<App />);
-    // Index page usually has the HeroSection with "Ahmed Shadow"
-    expect(await screen.findByText(/AHMED SHADOW/i)).toBeDefined();
+    // Index page has "Ahmed Shady" in Hero and About sections
+    const elements = await screen.findAllByText(/AHMED SHADY/i);
+    expect(elements.length).toBeGreaterThan(0);
   });
 
   it("renders About page on /about route", async () => {
@@ -41,13 +34,14 @@ describe("App Routing", () => {
   it("renders Transformations page on /transformations route", async () => {
     window.history.pushState({}, "Transformations", "/transformations");
     render(<App />);
-    expect(await screen.findByText(/TRANSFORMATIONS/i)).toBeDefined();
+    const elements = await screen.findAllByText(/TRANSFORMATIONS/i);
+    expect(elements.length).toBeGreaterThan(0);
   });
 
   it("renders Packages page on /packages route", async () => {
     window.history.pushState({}, "Packages", "/packages");
     render(<App />);
-    expect(await screen.findByText(/PACKAGES/i)).toBeDefined();
+    expect(await screen.findByText(/CHOOSE .../i)).toBeDefined();
   });
 
   it("renders Contact page on /contact route", async () => {
