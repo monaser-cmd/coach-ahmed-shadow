@@ -7,6 +7,7 @@ import Index from "./pages/Index.tsx";
 import About from "./pages/About.tsx";
 import Transformations from "./pages/Transformations.tsx";
 import HallOfFame from "./pages/HallOfFame.tsx";
+import Book from "./pages/Book.tsx";
 import Reviews from "./pages/Reviews.tsx";
 import Packages from "./pages/Packages.tsx";
 import Contact from "./pages/Contact.tsx";
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/about" element={<About />} />
             <Route path="/transformations" element={<Transformations />} />
             <Route path="/hall-of-fame" element={<HallOfFame />} />
+            <Route path="/book" element={<Book />} />
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/packages" element={<Packages />} />
             <Route path="/contact" element={<Contact />} />
