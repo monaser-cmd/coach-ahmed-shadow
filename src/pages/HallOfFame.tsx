@@ -108,6 +108,46 @@ const HallOfFame = () => {
         </div>
       </section>
 
+      {/* Authority Section */}
+      <section className="py-24 relative overflow-hidden">
+        <div className="container mx-auto px-4 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="glass-panel p-8 md:p-16 rounded-3xl text-center max-w-5xl mx-auto border border-primary/10 relative overflow-hidden"
+          >
+            <div className="absolute inset-0 bg-primary/5 blur-3xl rounded-full -z-10" />
+            
+            <h2 className="text-3xl md:text-5xl font-display font-bold mb-8 text-gradient uppercase tracking-tighter">
+              مش أي حد يقدر يوصلك للبطولات
+            </h2>
+            
+            <div className="space-y-6 font-arabic text-lg md:text-xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">
+              <p>
+                الفرق مش في التمرين بس<br />
+                الفرق في النظام… في التوجيه… في التفاصيل اللي محدش بيشوفها
+              </p>
+              
+              <p className="text-primary font-bold text-xl md:text-2xl">
+                النظام الصح + الالتزام = نتيجة حقيقية
+              </p>
+              
+              <p>
+                هنا بنشتغل بهدف واحد<br />
+                إنك تنافس… وتكسب
+              </p>
+              
+              <p>
+                مش بنجهزك تتمرن<br />
+                بنجهزك تقف قدام لجنة تحكيم… وتكون جاهز
+              </p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Placeholder for next sections */}
       <div id="results" />
 
