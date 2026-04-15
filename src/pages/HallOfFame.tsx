@@ -206,7 +206,82 @@ const HallOfFame = () => {
         </div>
       </section>
 
-      {/* Placeholder for next sections */}
+      {/* Emotional Hook Section */}
+      <section className="py-24 bg-[#050505] relative overflow-hidden">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto"
+          >
+            <h2 className="text-4xl md:text-6xl font-display font-bold mb-12 text-gradient leading-tight">
+              لو حلمك تقف على المسرح…<br />
+              لو نفسك تمسك ميدالية بإيدك
+            </h2>
+            <p className="font-arabic text-xl md:text-2xl text-muted-foreground leading-relaxed mb-8">
+              لو عايز تبص لنفسك وتقول أنا عملتها… يبقى انت في المكان الصح
+            </p>
+            <div className="h-px w-24 bg-primary mx-auto mb-8" />
+            <p className="font-arabic text-2xl md:text-3xl text-primary font-bold">
+              السؤال مش هل تقدر… السؤال: هتبدأ إمتى؟
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Trust Section */}
+      <section className="py-24 container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="glass-panel p-8 md:p-12 rounded-3xl text-center max-w-4xl mx-auto border border-white/5"
+        >
+          <h2 className="text-3xl md:text-5xl font-display font-bold mb-8 text-gradient">
+            النتائج دي مش صدفة
+          </h2>
+          <div className="space-y-6 font-arabic text-lg md:text-xl text-muted-foreground">
+            <p>
+              دي خبرة سنين… متابعة مستمرة… وتعديل في كل تفصيلة لحد ما توصل لأفضل نسخة منك
+            </p>
+            <p>
+              كل بطل شفته فوق كان في يوم من الأيام لسه بيبدأ
+            </p>
+            <p className="text-foreground font-bold">
+              والفرق الوحيد إنه قرر يكمل
+            </p>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Claim Your Legacy (CTA) */}
+      <section className="py-32 container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="glass-panel py-20 px-8 rounded-3xl border border-primary/20 bg-primary/5 text-center relative overflow-hidden group"
+        >
+          <div className="absolute inset-0 bg-primary/10 blur-[120px] rounded-full -z-10 transition-transform duration-1000 group-hover:scale-110" />
+          
+          <h2 className="text-4xl md:text-7xl font-display font-bold mb-8">
+            دورك جاي… <span className="text-gradient glow-text">جاهز تبدأ؟</span>
+          </h2>
+          
+          <p className="font-arabic text-xl md:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto">
+            متستناش الوقت المثالي… مفيش وقت مثالي<br />
+            فيه قرار… وإنت تاخده دلوقتي
+          </p>
+          
+          <a
+            href="/packages"
+            className="inline-block px-12 py-5 font-arabic text-xl tracking-wider bg-primary text-primary-foreground rounded-xl hover:scale-105 transition-all duration-300 shadow-neon uppercase"
+          >
+            اشترك الآن وابدأ رحلتك
+          </a>
+        </motion.div>
+      </section>
 
       <Footer />
     </main>
