@@ -148,8 +148,65 @@ const HallOfFame = () => {
         </div>
       </section>
 
+      {/* Results Section (Gallery) */}
+      <section id="results" className="py-24 container mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <h2 className="text-5xl md:text-7xl font-display font-bold mb-4">
+            <span className="text-gradient glow-text uppercase">شوف النتائج بنفسك</span>
+          </h2>
+          <div className="space-y-2 font-arabic text-lg md:text-xl text-muted-foreground tracking-widest max-w-3xl mx-auto">
+            <p>كل صورة هنا وراها قصة</p>
+            <p>تعب يومي | التزام صارم | ونظام معمول مخصوص علشان يوصل للستيدج</p>
+            <p className="pt-4">مفيش تجميل… مفيش وعود فاضية… فيه شغل ونتيجة واضحة قدامك</p>
+          </div>
+        </motion.div>
+
+        {/* Gallery Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {champions.map((src, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: (index % 3) * 0.1 }}
+              viewport={{ once: true }}
+              className="group relative cursor-pointer"
+            >
+              <Dialog>
+                <DialogTrigger asChild>
+                  <div className="relative overflow-hidden rounded-2xl neon-border aspect-[1040/1350] bg-card">
+                    <img
+                      src={src}
+                      alt="بطل حصل على ميدالية"
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                      <span className="font-display text-xs tracking-[0.3em] bg-primary/80 px-6 py-3 rounded-full text-white shadow-neon-sm border border-white/10">
+                        VIEW CHAMP
+                      </span>
+                    </div>
+                  </div>
+                </DialogTrigger>
+                <DialogContent className="max-w-4xl border-none bg-transparent p-0 shadow-none">
+                  <img
+                    src={src}
+                    alt="بطل حصل على ميدالية"
+                    className="w-full h-auto rounded-lg shadow-2xl border border-white/10"
+                  />
+                </DialogContent>
+              </Dialog>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* Placeholder for next sections */}
-      <div id="results" />
 
       <Footer />
     </main>
