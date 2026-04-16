@@ -38,19 +38,8 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center bg-background overflow-hidden px-4">
-      {/* 3D Background */}
-      <div className="absolute inset-0 z-0">
-        <Canvas
-          camera={{ position: [0, 0, 8], fov: 60 }}
-          gl={{ antialias: true, alpha: true }}
-          style={{ background: "transparent" }}
-        >
-          <ParticleField count={300} />
-        </Canvas>
-      </div>
-      
-      {/* Glow Effects */}
+    <div className="relative min-h-screen flex items-center justify-center bg-[#050505] overflow-hidden px-4">
+      {/* Background Glows */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] -z-10 animate-pulse" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] -z-10 animate-pulse" />
 

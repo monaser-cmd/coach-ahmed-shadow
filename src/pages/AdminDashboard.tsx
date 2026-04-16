@@ -46,17 +46,28 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (!session) {
+    const checkSession = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (!session) {
+          navigate("/admin");
+        } else {
+          setSession(session);
+          // Only fetch data if we have a session
+          Promise.all([
+            fetchPackages(),
+            fetchSiteSettings(),
+            fetchTransformations()
+          ]).finally(() => setLoading(false));
+        }
+      } catch (error) {
+        console.error("Session check error:", error);
         navigate("/admin");
-      } else {
-        setSession(session);
-        fetchPackages();
-        fetchSiteSettings();
-        fetchTransformations();
+        setLoading(false);
       }
-      setLoading(false);
-    });
+    };
+    
+    checkSession();
   }, [navigate]);
 
   const fetchTransformations = async () => {

@@ -1,10 +1,20 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { MessageCircle } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 const ContactSection = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+  const [whatsappUrl, setWhatsappUrl] = useState("https://wa.me/");
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      const { data } = await supabase.from("site_settings").select("*").eq("key", "whatsapp").single();
+      if (data) setWhatsappUrl(data.value);
+    };
+    fetchSettings();
+  }, []);
 
   return (
     <section id="contact" className="section-padding relative">
@@ -22,7 +32,7 @@ const ContactSection = () => {
           <p className="font-display text-xl text-muted-foreground mb-10">Online Coach</p>
 
           <a
-            href="https://wa.me/"
+            href={whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 px-10 py-4 bg-primary text-primary-foreground font-display text-base tracking-wider rounded-lg hover:opacity-90 transition-all animate-pulse-glow"
@@ -37,3 +47,4 @@ const ContactSection = () => {
 };
 
 export default ContactSection;
+

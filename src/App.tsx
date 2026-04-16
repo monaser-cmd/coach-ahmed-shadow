@@ -11,6 +11,7 @@ import Book from "./pages/Book.tsx";
 import Reviews from "./pages/Reviews.tsx";
 import Packages from "./pages/Packages.tsx";
 import Contact from "./pages/Contact.tsx";
+import Course from "./pages/Course.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import AdminLogin from "./pages/AdminLogin.tsx";
 import AdminDashboard from "./pages/AdminDashboard.tsx";
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/packages" element={<Packages />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/course" element={<Course />} />
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="*" element={<NotFound />} />

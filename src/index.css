@@ -76,6 +76,10 @@
     text-shadow: 0 0 20px hsl(var(--neon-red) / 0.5), 0 0 40px hsl(var(--neon-red) / 0.2);
   }
 
+  .glow-cyan {
+    text-shadow: 0 0 20px rgba(38, 188, 196, 0.5), 0 0 40px rgba(38, 188, 196, 0.2);
+  }
+
   .glass-panel {
     background: hsl(var(--surface-glass));
     backdrop-filter: blur(20px);
