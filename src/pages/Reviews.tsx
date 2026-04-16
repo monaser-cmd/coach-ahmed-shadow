@@ -4,8 +4,17 @@ import Footer from "@/components/Footer";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useState } from "react";
 
-// Import all images from the reviews folder
-const reviewImages = Array.from({ length: 21 }, (_, i) => `/src/assets/images/reviews/${i + 1}.jpg`);
+// Import all images from the reviews folder using Vite's glob import
+const imageModules = import.meta.glob("/src/assets/images/reviews/*.jpg", { eager: true });
+
+// Convert the object to an array and sort numerically by filename
+const reviewImages = Object.keys(imageModules)
+  .sort((a, b) => {
+    const aNum = parseInt(a.match(/(\d+)\.jpg$/)?.[1] || "0");
+    const bNum = parseInt(b.match(/(\d+)\.jpg$/)?.[1] || "0");
+    return aNum - bNum;
+  })
+  .map((key) => (imageModules[key] as any).default);
 
 const Reviews = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
