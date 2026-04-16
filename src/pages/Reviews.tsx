@@ -5,29 +5,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useState } from "react";
 
 // Import all images from the reviews folder
-const reviewImages = [
-  "/src/assets/images/reviews/photo_2026-04-14_22-56-06.jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_22-56-16.jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_22-56-17 (2).jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_22-56-17 (3).jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_22-56-17.jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_22-56-18.jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_23-01-13 (2).jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_23-01-13 (3).jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_23-01-13.jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_23-01-14 (2).jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_23-01-14.jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_23-01-16 (2).jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_23-01-16 (3).jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_23-01-16.jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_23-01-17 (2).jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_23-01-17 (3).jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_23-01-17 (4).jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_23-01-17.jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_23-01-18 (2).jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_23-01-18.jpg",
-  "/src/assets/images/reviews/photo_2026-04-14_23-01-19.jpg",
-];
+const reviewImages = Array.from({ length: 21 }, (_, i) => `/src/assets/images/reviews/${i + 1}.jpg`);
 
 const Reviews = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
