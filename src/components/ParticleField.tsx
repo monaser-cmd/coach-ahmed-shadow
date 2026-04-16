@@ -2,7 +2,7 @@ import { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-const ParticleField = ({ count = 500 }) => {
+const ParticleField = ({ count = 500, color = "#ff3333" }) => {
   const meshRef = useRef<THREE.Points>(null);
 
   const [positions, sizes] = useMemo(() => {
@@ -41,7 +41,7 @@ const ParticleField = ({ count = 500 }) => {
       </bufferGeometry>
       <pointsMaterial
         size={0.03}
-        color="#ff3333"
+        color={color}
         transparent
         opacity={0.6}
         sizeAttenuation

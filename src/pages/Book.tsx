@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { Canvas } from "@react-three/fiber";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ParticleField from "@/components/ParticleField";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -51,8 +53,8 @@ const Book = () => {
             transition={{ duration: 0.8 }}
             className="flex-1 text-center lg:text-right"
           >
-            <h1 className="text-4xl md:text-6xl font-display font-bold mb-8 leading-tight">
-              كتاب <span style={{ color: neonColor, textShadow: neonGlow }}>شـادو</span>
+            <h1 className="text-4xl md:text-6xl font-display font-bold mb-8 leading-tight italic">
+              <span style={{ color: neonColor, textShadow: neonGlow }}>coaching yourself book</span>
             </h1>
             <p className="font-arabic text-lg md:text-xl text-muted-foreground mb-10 leading-loose">
               يحتوي علي انظمة تمرين تقدر تستمر عليها ٣ سنين بدون ما تحتاج لمدرب .
@@ -67,16 +69,23 @@ const Book = () => {
               <br />
               تقدر تستخدم عدد منهم حسب احتياجك
             </p>
-            <Button
-              className="px-12 py-8 text-xl font-display rounded-xl transition-all duration-300 hover:scale-105"
-              style={{ 
-                backgroundColor: neonColor, 
-                color: "#000",
-                boxShadow: `0 0 20px ${neonColor}66`
-              }}
+            <a 
+              href="https://www.easykash.net/Ahmed%20Shadoow/pay" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="inline-block"
             >
-              اشتري الآن
-            </Button>
+              <Button
+                className="px-12 py-8 text-xl font-display rounded-xl transition-all duration-300 hover:scale-105"
+                style={{ 
+                  backgroundColor: neonColor, 
+                  color: "#000",
+                  boxShadow: `0 0 20px ${neonColor}66`
+                }}
+              >
+                اشتري الآن
+              </Button>
+            </a>
           </motion.div>
         </div>
       </section>
@@ -135,16 +144,23 @@ const Book = () => {
           <h2 className="text-4xl md:text-6xl font-display font-bold mb-8">
             ابدأ دلوقتي واستثمر في نفسك
           </h2>
-          <Button
-            className="px-16 py-10 text-2xl font-display rounded-2xl transition-all duration-500 hover:scale-110 shadow-neon"
-            style={{ 
-              backgroundColor: neonColor, 
-              color: "#000",
-              boxShadow: `0 0 30px ${neonColor}88`
-            }}
+          <a 
+            href="https://www.easykash.net/Ahmed%20Shadoow/pay" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-block"
           >
-            اشتري الكتاب الآن
-          </Button>
+            <Button
+              className="px-16 py-10 text-2xl font-display rounded-2xl transition-all duration-500 hover:scale-110 shadow-neon"
+              style={{ 
+                backgroundColor: neonColor, 
+                color: "#000",
+                boxShadow: `0 0 30px ${neonColor}88`
+              }}
+            >
+              اشتري الكتاب الآن
+            </Button>
+          </a>
         </motion.div>
       </section>
 
