@@ -69,25 +69,25 @@ const Contact = () => {
               <ContactInfoCard 
                 icon={<MessageCircle className="w-6 h-6" />}
                 title="WhatsApp"
-                value="+20 123 456 7890"
-                link="https://wa.me/"
+                value={links.whatsapp || "+20 123 456 7890"}
+                link={links.whatsapp ? `https://wa.me/${links.whatsapp.replace(/\s+/g, '')}` : "https://wa.me/"}
               />
               <ContactInfoCard 
                 icon={<Instagram className="w-6 h-6" />}
                 title="Instagram"
                 value="@ahmedshady10"
-                link="https://instagram.com/"
+                link={links.instagram || "https://instagram.com/"}
               />
               <ContactInfoCard 
                 icon={<Facebook className="w-6 h-6" />}
                 title="Facebook"
                 value="@ahmedshady10"
-                link="https://facebook.com/"
+                link={links.facebook || "https://facebook.com/"}
               />
               <ContactInfoCard 
                 icon={<MapPin className="w-6 h-6" />}
                 title="Base"
-                value="Cairo, Egypt"
+                value="Alexandria, Egypt"
               />
             </div>
 
