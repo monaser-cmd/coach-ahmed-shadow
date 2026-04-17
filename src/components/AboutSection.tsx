@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import coachImg from "@/assets/coach-portrait.jpg";
+import coachImg from "@/assets/coach-portrait-2.jpeg";
 
 const AboutSection = () => {
   const ref = useRef(null);
@@ -15,9 +15,9 @@ const AboutSection = () => {
           initial={{ opacity: 0, x: -50 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="relative"
+          className="relative flex justify-center"
         >
-          <div className="relative rounded-2xl overflow-hidden neon-border">
+          <div className="relative rounded-2xl overflow-hidden neon-border max-w-md">
             <img
               src={coachImg}
               alt="Coach Ahmed Shadow"

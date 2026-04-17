@@ -1,8 +1,68 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Check } from "lucide-react";
+import { 
+  Check, 
+  Dumbbell, 
+  Apple, 
+  Video, 
+  Activity, 
+  ClipboardList, 
+  BookOpen, 
+  MessageCircle, 
+  Clock, 
+  UserCheck 
+} from "lucide-react";
+
+const serviceFeatures = [
+  {
+    icon: <Apple className="w-6 h-6 text-primary" />,
+    title: "ملف تغذية مخصوص",
+    description: "تصميم ملف تغذية مخصوص ليومك وحسب احتياجك الفعلي لضمان أفضل نتائج"
+  },
+  {
+    icon: <Dumbbell className="w-6 h-6 text-primary" />,
+    title: "برنامج تدريبي مخصص",
+    description: "تمرين مناسب لمستواك وعمرك التدريبي، سواء كنت مبتدئ أو محترف"
+  },
+  {
+    icon: <Video className="w-6 h-6 text-primary" />,
+    title: "تصحيح الأداء",
+    description: "ملف متخصص لتصحيح أداء التمارين لضمان التمرين بأمان وفعالية"
+  },
+  {
+    icon: <Activity className="w-6 h-6 text-primary" />,
+    title: "ملف إطالات احترافي",
+    description: "ملف استريتشات مقدم من دكتور علاج طبيعي لمرونة أفضل وسرعة استشفاء"
+  },
+  {
+    icon: <ClipboardList className="w-6 h-6 text-primary" />,
+    title: "جدول متابعة (Follow-up)",
+    description: "ملف متواجد بيه جدول متابعة دقيق لتسهيل رحلتك وقياس تطورك"
+  },
+  {
+    icon: <BookOpen className="w-6 h-6 text-primary" />,
+    title: "كتاب وصفات صحية",
+    description: "مجموعة من الوصفات اللذيذة للأكل الصحي عشان تزهقش من الدايت"
+  },
+  {
+    icon: <MessageCircle className="w-6 h-6 text-primary" />,
+    title: "متابعة واتساب مجانية",
+    description: "خدمة المتابعة على الواتساب مجانًا بعد شراء الأنظمة للإجابة على استفساراتك"
+  },
+  {
+    icon: <Clock className="w-6 h-6 text-primary" />,
+    title: "سرعة في الرد",
+    description: "رد سريع خلال 24 ساعة (بمعدل 1-2 مرة يومياً) مع إجازة يوم واحد أسبوعياً"
+  },
+  {
+    icon: <UserCheck className="w-6 h-6 text-primary" />,
+    title: "تحفيز مستمر",
+    description: "بسأل عليك باستمرار كل أسبوع لو غيبت لرفع مستوى التحفيز والالتزام"
+  }
+];
 
 const packages = [
+  // ... (unchanged)
   {
     id: "1",
     name: "باقة الشهر",
@@ -77,6 +137,42 @@ const PackagesSection = () => {
             </p>
           </div>
         </motion.div>
+
+        {/* New Service Features Grid */}
+        <div className="mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <h3 className="text-2xl md:text-3xl font-display font-bold mb-4">
+              مميزات <span className="text-gradient">خدمة التدريب الأونلاين</span>
+            </h3>
+            <div className="h-1 w-20 bg-primary mx-auto rounded-full mb-8" />
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {serviceFeatures.map((feature, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={inView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.05 }}
+                whileHover={{ y: -5, borderColor: "rgba(38, 188, 196, 0.3)" }}
+                className="glass-panel p-6 rounded-2xl border border-white/5 flex flex-col items-center text-center group transition-all"
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  {feature.icon}
+                </div>
+                <h4 className="font-arabic text-lg font-bold mb-2 text-foreground">{feature.title}</h4>
+                <p className="font-arabic text-sm text-muted-foreground leading-relaxed">
+                  {feature.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {packages.map((pkg, i) => (
