@@ -18,6 +18,12 @@ const Contact = () => {
     whatsapp_link: "https://wa.me/"
   });
 
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    objective: ""
+  });
+
   useEffect(() => {
     const fetchLinks = async () => {
       const { data, error } = await supabase
@@ -38,9 +44,21 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    const phoneNumber = links.whatsapp?.replace(/\s+/g, '') || "201234567890";
+    const message = `*New Inquiry from Shadow Realm Terminal*
+👤 *Name:* ${formData.name}
+📧 *Email:* ${formData.email}
+🎯 *Objective:* ${formData.objective}`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    
+    window.open(whatsappUrl, '_blank');
+
     toast({
-      title: "Transmission Received",
-      description: "Establishing secure link. We'll respond shortly.",
+      title: "Transmission Initiated",
+      description: "Opening secure link to WhatsApp...",
     });
   };
 
@@ -115,6 +133,9 @@ const Contact = () => {
                   <label className="text-[10px] uppercase tracking-[0.3em] text-primary/70 font-display ml-1">Full Name</label>
                   <Input 
                     placeholder="IDENTIFY YOURSELF" 
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="bg-background/40 border-primary/20 focus:border-primary transition-all rounded-xl h-14 font-display text-sm tracking-widest placeholder:text-muted-foreground/30"
                   />
                 </div>
@@ -123,6 +144,9 @@ const Contact = () => {
                   <Input 
                     type="email" 
                     placeholder="COMMUNICATION FREQUENCY" 
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="bg-background/40 border-primary/20 focus:border-primary transition-all rounded-xl h-14 font-display text-sm tracking-widest placeholder:text-muted-foreground/30"
                   />
                 </div>
@@ -130,6 +154,9 @@ const Contact = () => {
                   <label className="text-[10px] uppercase tracking-[0.3em] text-primary/70 font-display ml-1">Objective</label>
                   <Textarea 
                     placeholder="DEFINE YOUR GOALS..." 
+                    required
+                    value={formData.objective}
+                    onChange={(e) => setFormData({ ...formData, objective: e.target.value })}
                     className="bg-background/40 border-primary/20 focus:border-primary transition-all rounded-xl min-h-[120px] font-display text-sm tracking-widest placeholder:text-muted-foreground/30"
                   />
                 </div>
