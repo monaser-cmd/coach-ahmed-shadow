@@ -1,14 +1,40 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import { MessageCircle, Mail, Instagram, MapPin } from "lucide-react";
+import { MessageCircle, Facebook, Instagram, MapPin } from "lucide-react";
 
 const Contact = () => {
   const { toast } = useToast();
+  const [links, setLinks] = useState<Record<string, string>>({
+    whatsapp: "+20 123 456 7890",
+    instagram: "https://instagram.com/",
+    facebook: "https://facebook.com/",
+    whatsapp_link: "https://wa.me/"
+  });
+
+  useEffect(() => {
+    const fetchLinks = async () => {
+      const { data, error } = await supabase
+        .from("site_settings")
+        .select("*");
+      
+      if (!error && data) {
+        const settings = data.reduce((acc: Record<string, string>, curr) => {
+          acc[curr.key] = curr.value;
+          return acc;
+        }, {});
+        setLinks(prev => ({ ...prev, ...settings }));
+      }
+    };
+
+    fetchLinks();
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,10 +79,10 @@ const Contact = () => {
                 link="https://instagram.com/"
               />
               <ContactInfoCard 
-                icon={<Mail className="w-6 h-6" />}
-                title="Email"
-                value="coach@ahmedshadow.com"
-                link="mailto:coach@ahmedshadow.com"
+                icon={<Facebook className="w-6 h-6" />}
+                title="Facebook"
+                value="@ahmedshady10"
+                link="https://facebook.com/"
               />
               <ContactInfoCard 
                 icon={<MapPin className="w-6 h-6" />}
