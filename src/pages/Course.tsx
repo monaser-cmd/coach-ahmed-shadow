@@ -39,8 +39,16 @@ const Course = () => {
           <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
             مش بس هتعرف "إيه"… هتعرف "إزاي تتصرف مع أي حالة"
           </p>
+          
+          <div className="mb-10 space-y-2">
+            <p className="text-2xl md:text-3xl font-bold text-white">
+              سعر الكورس <span className="text-[#26bcc4]">2500 ج.م</span> بدلاً من <span className="line-through text-gray-500 decoration-red-500">5000 ج.م</span>
+            </p>
+            <p className="text-[#26bcc4] text-sm font-medium tracking-widest uppercase animate-pulse">عرض خاص لفترة محدودة 🔥</p>
+          </div>
+
           <a 
-            href={whatsappUrl}
+            href="https://www.easykash.net/Ahmed%20Shadoow/pay"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-10 py-4 bg-[#26bcc4] text-black font-bold rounded-xl shadow-[0_0_20px_rgba(38,188,196,0.3)] hover:scale-105 transition-transform"
@@ -319,7 +327,7 @@ const Course = () => {
               بدل ما تشتري كورسات تغذية متفرقة وتتوه في المعلومات — كل حاجة هنا متكاملة ومرتبة من الصفر للاحتراف
             </p>
             <a 
-              href={whatsappUrl}
+              href="https://www.easykash.net/Ahmed%20Shadoow/pay"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-12 py-5 bg-[#26bcc4] text-black font-bold text-xl rounded-2xl shadow-[0_0_40px_rgba(38,188,196,0.3)] hover:scale-105 transition-all"

@@ -3,10 +3,12 @@ import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/lib/supabase";
-import { Loader2 } from "lucide-react";
+import { Loader2, Star, Award } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 // Import local transformation images
+import featuredT from "@/assets/images/featured Transformation/featured-Transformation.jpeg";
 import t1 from "@/assets/transform-1.jpeg";
 import t2 from "@/assets/transform-2.jpeg";
 import t3 from "@/assets/transform-3.jpeg";
@@ -73,6 +75,74 @@ const Transformations = () => {
           <p className="text-muted-foreground font-arabic text-lg md:text-xl tracking-widest mb-8">
             نتائج تحول العملاء - نماذج حقيقية من التغيير الجسدي والذهني مع برنامج شادو
           </p>
+        </motion.div>
+
+        {/* Featured Transformation */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="mb-24 max-w-5xl mx-auto"
+        >
+          <div className="relative group overflow-hidden rounded-3xl neon-border bg-card shadow-[0_0_50px_rgba(255,0,0,0.1)]">
+            <div className="absolute top-6 left-6 z-20 flex items-center gap-2 bg-primary/90 px-4 py-2 rounded-full backdrop-blur-md shadow-lg animate-pulse-glow">
+              <Award className="w-5 h-5 text-white" />
+              <span className="font-display text-[10px] tracking-[0.2em] text-white uppercase font-bold">Featured Result</span>
+            </div>
+            
+            <div className="grid lg:grid-cols-2 gap-0">
+              <div className="relative h-[400px] lg:h-[600px] overflow-hidden">
+                <img
+                  src={featuredT}
+                  alt="Featured transformation"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-60" />
+              </div>
+              
+              <div className="p-8 lg:p-12 flex flex-col justify-center bg-card/50 backdrop-blur-sm relative">
+                <Star className="absolute top-12 right-12 w-24 h-24 text-primary/5 opacity-20" />
+                <h3 className="text-3xl lg:text-4xl font-arabic font-bold mb-6 text-foreground leading-tight">
+                  تحول جذري وشامل <br />
+                  <span className="text-gradient">قصة نجاح مميزة</span>
+                </h3>
+                <p className="text-muted-foreground font-arabic text-lg leading-relaxed mb-8">
+                  الالتزام والاستمرارية مع نظام شادو العلمي هو المفتاح لتحقيق هذه النتائج المبهرة. هذا التحول هو مثال حي على أن المستحيل ممكن مع التوجيه الصحيح والإرادة القوية.
+                </p>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    <span className="text-sm font-arabic text-foreground/80">نظام غذائي مخصص 100%</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    <span className="text-sm font-arabic text-foreground/80">برنامج تدريبي مكثف</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    <span className="text-sm font-arabic text-foreground/80">متابعة يومية دقيقة</span>
+                  </div>
+                </div>
+                <div className="mt-10">
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button className="bg-primary hover:bg-primary/90 text-white font-display tracking-widest px-8 h-12 rounded-xl">
+                        FULL VIEW
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-4xl border-none bg-transparent p-0 shadow-none">
+                      <img
+                        src={featuredT}
+                        alt="Featured transformation full"
+                        className="w-full h-auto rounded-lg shadow-2xl"
+                      />
+                    </DialogContent>
+                  </Dialog>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         {/* Transformations Grid */}

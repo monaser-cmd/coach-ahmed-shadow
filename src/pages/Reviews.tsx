@@ -46,7 +46,7 @@ const Reviews = () => {
           className="max-w-4xl mx-auto glass-panel p-8 rounded-2xl neon-border border-primary/20 text-center mb-20"
         >
           <h2 className="font-arabic text-2xl md:text-4xl font-bold text-foreground">
-            أكثر من 2000 عميل حققوا نتائج حقيقية 🖤
+            أكثر من 3000 عميل حققوا نتائج حقيقية 🖤
           </h2>
         </motion.div>
 

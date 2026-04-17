@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
 import { motion } from "framer-motion";
-import { Lock, Mail, Loader2 } from "lucide-react";
+import { Lock, Mail, Loader2, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
@@ -39,6 +39,16 @@ const AdminLogin = () => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center bg-[#050505] overflow-hidden px-4">
+      {/* Back to Home Button */}
+      <div className="absolute top-8 left-8 z-20">
+        <Link to="/">
+          <Button variant="ghost" className="text-muted-foreground hover:text-white gap-2 font-display text-xs tracking-widest transition-colors">
+            <Home className="w-4 h-4" />
+            BACK TO HOME
+          </Button>
+        </Link>
+      </div>
+
       {/* Background Glows */}
       <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] -z-10 animate-pulse" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] -z-10 animate-pulse" />

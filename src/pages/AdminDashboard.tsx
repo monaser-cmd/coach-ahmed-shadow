@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
 import { motion } from "framer-motion";
 import { Session } from "@supabase/supabase-js";
@@ -12,7 +12,8 @@ import {
   Plus,
   Trash2,
   Save,
-  Loader2
+  Loader2,
+  ExternalLink
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -231,14 +232,25 @@ const AdminDashboard = () => {
               <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em]">Management Terminal</p>
             </div>
           </div>
-          <Button 
-            variant="ghost" 
-            onClick={handleLogout}
-            className="text-muted-foreground hover:text-primary hover:bg-primary/10"
-          >
-            <LogOut className="w-4 h-4 mr-2" />
-            Sign Out
-          </Button>
+          <div className="flex items-center gap-2">
+            <Link to="/">
+              <Button 
+                variant="ghost" 
+                className="text-muted-foreground hover:text-primary hover:bg-primary/10 hidden md:flex"
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                View Website
+              </Button>
+            </Link>
+            <Button 
+              variant="ghost" 
+              onClick={handleLogout}
+              className="text-muted-foreground hover:text-primary hover:bg-primary/10"
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign Out
+            </Button>
+          </div>
         </div>
       </header>
 

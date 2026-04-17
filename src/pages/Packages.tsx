@@ -71,9 +71,9 @@ const Packages = () => {
           
           <div className="max-w-2xl mx-auto glass-panel p-6 rounded-xl border border-primary/20">
             <p className="font-arabic text-lg md:text-xl text-foreground leading-relaxed whitespace-pre-line">
-              ✨️ عروض خدمات شادو✨️
+              ✨️ عروض خدمات شادو ✨️
               {"\n"}رقمي واتساب ومحفظة كاش 01226249344
-              {"\n"}العروض بمناسبة تجاوزي عدد ال2000عميل🖤
+              {"\n"}العروض بمناسبة تجاوزي عدد ال3000 عميل 🖤
             </p>
           </div>
         </motion.div>
@@ -123,7 +123,7 @@ const Packages = () => {
               </ul>
 
               <a
-                href="https://wa.me/201226249344"
+                href="https://www.easykash.net/Ahmed%20Shadoow/pay"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`block text-center px-8 py-4 font-arabic text-sm tracking-[0.1em] rounded-xl transition-all uppercase ${
@@ -137,6 +137,22 @@ const Packages = () => {
             </motion.div>
           ))}
         </div>
+      </section>
+
+      {/* Refund Policy Disclaimer */}
+      <section className="container mx-auto px-4 pb-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-4xl mx-auto glass-panel p-8 rounded-3xl border border-red-500/20 bg-red-500/5 text-center relative overflow-hidden"
+        >
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-50" />
+          <h2 className="font-arabic text-2xl font-bold text-red-500 mb-6 uppercase tracking-widest">تنبيه هام جداً ⚠️</h2>
+          <p className="font-arabic text-lg md:text-xl text-foreground leading-loose whitespace-pre-line">
+            لا يوجد استرداد الاشتراك تحت اي ظرف او ايقاف متابعة مؤقت الاشتراك للجادين فقط وتم تبليغك عشان لو مش مناسبك ممنوع منعا باتا اظهار اي اعذار او ظروف في مسألة الاسترداد ومش باخد حق انظمة وابعت باقي الاشتراك.
+          </p>
+        </motion.div>
       </section>
 
       <Footer />

@@ -131,9 +131,10 @@ const PackagesSection = () => {
           
           <div className="max-w-2xl mx-auto glass-panel p-6 rounded-xl border border-primary/20 mb-12">
             <p className="font-arabic text-lg md:text-xl text-foreground leading-relaxed whitespace-pre-line">
-              ✨️ عروض خدمات شادو✨️
+              ✨️ عروض خدمات شادو ✨️
               {"\n"}رقمي واتساب ومحفظة كاش 01226249344
-              {"\n"}العروض بمناسبة تجاوزي عدد ال2000عميل🖤
+              {"\n"}العروض بمناسبة تجاوزي عدد ال3000 عميل 🖤
+              {"\n"}<span className="text-primary font-bold">خدمة المتابعة علي واتساب مجاناً بعد شراء الانظمة</span>
             </p>
           </div>
         </motion.div>
@@ -210,7 +211,7 @@ const PackagesSection = () => {
                 ))}
               </ul>
               <a
-                href="https://wa.me/201226249344"
+                href="https://www.easykash.net/Ahmed%20Shadoow/pay"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`block text-center px-6 py-3 font-arabic text-sm tracking-wider rounded-lg transition-all ${

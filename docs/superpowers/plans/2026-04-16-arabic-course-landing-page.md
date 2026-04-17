@@ -1,6 +1,6 @@
 # Arabic Course Landing Page Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Build a premium, RTL Arabic landing page for the "Nutrition Coach" course with neon cyan accents and dynamic WhatsApp integration.
 
@@ -17,7 +17,7 @@
 - Modify: `src/App.tsx`
 - Modify: `src/components/Navbar.tsx`
 
-- [ ] **Step 1: Create basic page scaffold**
+- [x] **Step 1: Create basic page scaffold**
 ```tsx
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -37,7 +37,7 @@ const Course = () => {
 export default Course;
 ```
 
-- [ ] **Step 2: Add route to App.tsx**
+- [x] **Step 2: Add route to App.tsx**
 ```tsx
 // Import
 import Course from "./pages/Course.tsx";
@@ -46,7 +46,7 @@ import Course from "./pages/Course.tsx";
 <Route path="/course" element={<Course />} />
 ```
 
-- [ ] **Step 3: Add link to Navbar.tsx**
+- [x] **Step 3: Add link to Navbar.tsx**
 ```tsx
 const navLinks = [
   { label: "Home", href: "/" },
@@ -56,10 +56,10 @@ const navLinks = [
 ];
 ```
 
-- [ ] **Step 4: Verify navigation**
+- [x] **Step 4: Verify navigation**
 Run: `npm run dev` and click "Arabic Course" in Navbar.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 ```bash
 git add src/pages/Course.tsx src/App.tsx src/components/Navbar.tsx
 git commit -m "feat: add course page route and nav link"
@@ -72,7 +72,7 @@ git commit -m "feat: add course page route and nav link"
 **Files:**
 - Modify: `src/pages/Course.tsx`
 
-- [ ] **Step 1: Implement Hero Section with Supabase hook**
+- [x] **Step 1: Implement Hero Section with Supabase hook**
 ```tsx
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
@@ -116,7 +116,7 @@ useEffect(() => {
 </section>
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 ```bash
 git add src/pages/Course.tsx
 git commit -m "feat: implement hero section and whatsapp integration"
@@ -129,7 +129,7 @@ git commit -m "feat: implement hero section and whatsapp integration"
 **Files:**
 - Modify: `src/pages/Course.tsx`
 
-- [ ] **Step 1: Add Video Section**
+- [x] **Step 1: Add Video Section**
 ```tsx
 <section className="py-20 container mx-auto px-4">
   <motion.div 
@@ -146,7 +146,7 @@ git commit -m "feat: implement hero section and whatsapp integration"
 </section>
 ```
 
-- [ ] **Step 2: Add Problem Section (Pain points)**
+- [x] **Step 2: Add Problem Section (Pain points)**
 ```tsx
 const painPoints = [
   "بتدي أنظمة غذائية عشوائية ومش بتجيب نتائج",
@@ -177,7 +177,7 @@ const painPoints = [
 </section>
 ```
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 ```bash
 git add src/pages/Course.tsx
 git commit -m "feat: add video and problem sections"
@@ -190,7 +190,7 @@ git commit -m "feat: add video and problem sections"
 **Files:**
 - Modify: `src/pages/Course.tsx`
 
-- [ ] **Step 1: Add Course Modules Grid**
+- [x] **Step 1: Add Course Modules Grid**
 ```tsx
 const modules = [
   { title: "حساب السعرات والماكروز", body: "بدقة وبشكل عملي حسب هدف كل عميل" },
@@ -218,7 +218,7 @@ const modules = [
 </section>
 ```
 
-- [ ] **Step 2: Add Before/After Comparison**
+- [x] **Step 2: Add Before/After Comparison**
 ```tsx
 <section className="py-20 bg-[#0a0a0a]">
   <div className="container mx-auto px-4">
@@ -237,7 +237,7 @@ const modules = [
 </section>
 ```
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 ```bash
 git add src/pages/Course.tsx
 git commit -m "feat: add modules and before/after sections"
@@ -250,8 +250,8 @@ git commit -m "feat: add modules and before/after sections"
 **Files:**
 - Modify: `src/pages/Course.tsx`
 
-- [ ] **Step 1: Add "Who is this for" and "Certification"**
-- [ ] **Step 2: Add Final CTA Section**
+- [x] **Step 1: Add "Who is this for" and "Certification"**
+- [x] **Step 2: Add Final CTA Section**
 ```tsx
 <section className="py-32 text-center">
   <div className="container mx-auto px-4">
@@ -267,8 +267,8 @@ git commit -m "feat: add modules and before/after sections"
 </section>
 ```
 
-- [ ] **Step 3: Verify responsive layout and animations**
-- [ ] **Step 4: Commit**
+- [x] **Step 3: Verify responsive layout and animations**
+- [x] **Step 4: Commit**
 ```bash
 git add src/pages/Course.tsx
 git commit -m "feat: complete final cta and polish landing page"

@@ -6,7 +6,7 @@ import ParticleField from "@/components/ParticleField";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 // Hero Banner
-import banner from "@/assets/images/Champs and Medals/champ-banner.webp";
+import banner from "@/assets/champs-intro.jpg";
 
 // Champion Images
 import c1 from "@/assets/images/Champs and Medals/Champ-1.webp";
@@ -275,7 +275,9 @@ const HallOfFame = () => {
           </p>
           
           <a
-            href="/packages"
+            href="https://www.easykash.net/Ahmed%20Shadoow/pay"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block px-12 py-5 font-arabic text-xl tracking-wider bg-primary text-primary-foreground rounded-xl hover:scale-105 transition-all duration-300 shadow-neon uppercase"
           >
             اشترك الآن وابدأ رحلتك
