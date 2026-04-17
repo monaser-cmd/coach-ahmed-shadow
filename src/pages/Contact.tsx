@@ -45,7 +45,7 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    const phoneNumber = links.whatsapp?.replace(/\s+/g, '') || "201234567890";
+    const phoneNumber = links.whatsapp?.replace(/\D/g, '') || "201234567890";
     const message = `*New Inquiry from Shadow Realm Terminal*
 👤 *Name:* ${formData.name}
 📧 *Email:* ${formData.email}
@@ -88,7 +88,7 @@ const Contact = () => {
                 icon={<MessageCircle className="w-6 h-6" />}
                 title="WhatsApp"
                 value={links.whatsapp || "+20 123 456 7890"}
-                link={links.whatsapp ? `https://wa.me/${links.whatsapp.replace(/\s+/g, '')}` : "https://wa.me/"}
+                link={links.whatsapp ? `https://wa.me/${links.whatsapp.replace(/\D/g, '')}` : "https://wa.me/"}
               />
               <ContactInfoCard 
                 icon={<Instagram className="w-6 h-6" />}

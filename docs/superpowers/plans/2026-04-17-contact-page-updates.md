@@ -78,7 +78,7 @@ Replace the existing cards with dynamic ones, replacing Email with Facebook and 
     icon={<MessageCircle className="w-6 h-6" />}
     title="WhatsApp"
     value={links.whatsapp || "+20 123 456 7890"}
-    link={links.whatsapp ? `https://wa.me/${links.whatsapp.replace(/\s+/g, '')}` : "https://wa.me/"}
+    link={links.whatsapp ? `https://wa.me/${links.whatsapp.replace(/\D/g, '')}` : "https://wa.me/"}
   />
   <ContactInfoCard 
     icon={<Instagram className="w-6 h-6" />}
@@ -130,7 +130,7 @@ const [formData, setFormData] = useState({
 const handleSubmit = (e: React.FormEvent) => {
   e.preventDefault();
   
-  const phoneNumber = links.whatsapp?.replace(/\s+/g, '') || "201234567890";
+  const phoneNumber = links.whatsapp?.replace(/\D/g, '') || "201234567890";
   const message = `*New Inquiry from Shadow Realm Terminal*
 👤 *Name:* ${formData.name}
 📧 *Email:* ${formData.email}
@@ -209,10 +209,10 @@ git commit -m "feat(contact): transform inquiry form into whatsapp terminal"
 
 ---
 
-### Task 4: Final Verification
+### Task 4: Final Verification [COMPLETED]
 
-- [ ] **Step 1: Verify data fetching**
+- [x] **Step 1: Verify data fetching**
 Ensure links update when changed in database (via admin dashboard).
 
-- [ ] **Step 2: Verify WhatsApp redirect**
+- [x] **Step 2: Verify WhatsApp redirect**
 Test the "TRANSMIT" button with sample data and ensure the message is correctly formatted in the opened tab.

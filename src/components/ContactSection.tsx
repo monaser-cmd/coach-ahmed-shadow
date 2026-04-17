@@ -11,7 +11,10 @@ const ContactSection = () => {
   useEffect(() => {
     const fetchSettings = async () => {
       const { data } = await supabase.from("site_settings").select("*").eq("key", "whatsapp").single();
-      if (data) setWhatsappUrl(data.value);
+      if (data) {
+        const pureNumber = data.value.replace(/\D/g, '');
+        setWhatsappUrl(`https://wa.me/${pureNumber}`);
+      }
     };
     fetchSettings();
   }, []);
