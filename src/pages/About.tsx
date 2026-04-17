@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
-import coachImg from "@/assets/coach-portrait.jpg";
+import coachImg from "@/assets/coach-portrait-2.jpeg";
 
 const About = () => {
   return (
