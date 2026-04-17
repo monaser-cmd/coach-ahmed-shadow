@@ -44,13 +44,13 @@ const About = () => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
+            className="relative flex justify-center lg:justify-end"
           >
-            <div className="relative rounded-2xl overflow-hidden neon-border shadow-[0_0_50px_rgba(255,0,0,0.2)]">
+            <div className="relative rounded-2xl overflow-hidden neon-border shadow-[0_0_50px_rgba(255,0,0,0.2)] max-w-sm">
               <img
                 src={coachImg}
                 alt="Coach Ahmed Shady"
-                className="w-full h-auto object-cover transition-all duration-700"
+                className="w-full h-auto object-cover transition-all duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
             </div>
